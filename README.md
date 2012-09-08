@@ -47,5 +47,6 @@ It will show you the stuff you can do (e.g. save file using Ctrl-S)
 However, the hotkey for decreasing fontsize (Ctrl-minus) doesn't
 seem to work. On the other hand, increasing the font size (Ctrl-=)
 seems to work ok.
+ --------> Nevermind --- I got it fixed .
 
 
