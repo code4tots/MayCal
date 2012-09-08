@@ -7,14 +7,18 @@ You can start the program by running:
 Ctrl+Y will execute every line that starts with a semicolon.
 
 ; f := \x y -> x + y
+
 ; f(12, 24)
+
 36
 
 As you can see, Haskell style lambdas are supported,
 although, you can also define functions as below:
 
 ; g(n) := 1 if n = 1 else n * g(n - 1)
+
 ; g(5)
+
 120
 
 As you can see Python style if - else expressions are
@@ -43,4 +47,5 @@ It will show you the stuff you can do (e.g. save file using Ctrl-S)
 However, the hotkey for decreasing fontsize (Ctrl-minus) doesn't
 seem to work. On the other hand, increasing the font size (Ctrl-=)
 seems to work ok.
+
 
