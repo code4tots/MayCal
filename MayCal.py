@@ -17,7 +17,6 @@ def lex(strg):
     return (strg.replace('(', ' ( ').
                  replace(')', ' ) ').
                  replace(',', ' , ').
-                 replace(':', ' : ').
                  replace('\\', ' \\ ').
                  split())
                 
@@ -28,6 +27,7 @@ def parse(tokens):
     tokens = parseParenthesis(tokens)
     tokens = parseLambdaExpr(tokens)
     tokens = parseIfExpr(tokens)
+    tokens = parseBinop(tokens, {':': 'cons'}, isLeftAssociative = False)
     tokens = parseBinop(tokens, {'^': 'exponent'}, isLeftAssociative = False)
     tokens = parseBinop(tokens, {'*': 'multiply', '/': 'divide'})
     tokens = parseBinop(tokens, {'+': 'add', '-': 'subtract'})
@@ -107,9 +107,9 @@ def parseBinop(tokens, operators, isLeftAssociative = True):
         i = 1 if isLeftAssociative else len(tokens) - 2
         
         if isLeftAssociative:
-            while tokens[i] not in operators: i += 1
+            while (not isinstance(tokens[i],str)) or tokens[i] not in operators: i += 1
         else:
-            while tokens[i] not in operators: i -= 1
+            while (not isinstance(tokens[i],str)) or tokens[i] not in operators: i -= 1
             
         tokens = tokens[:i-1] + [ [operators[tokens[i]], tokens[i-1], tokens[i+1]] ] + tokens[i+2:]
         
@@ -150,6 +150,15 @@ def GreaterThan(a,b): return a > b
 
 @MayCalcFunc
 def Modulo(a,b): return a % b
+
+@MayCalcFunc
+def Cons(a,b): return [a] + b
+
+@MayCalcFunc
+def Car(a): return a[0]
+
+@MayCalcFunc
+def Cdr(a): return a[1:]
 
 def If_function(ev, condition, a, b):
     if ev(condition): return ev(a)
@@ -204,6 +213,12 @@ class Environment(object):
         self.base = {
             'True': True,
             'False': False,
+            
+            '[]': [],
+            'nil': [],
+            'cons': Cons,
+            'car': Car,
+            'cdr': Cdr,
         
             'add': Add,
             'subtract': Subtract,

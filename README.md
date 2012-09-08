@@ -49,4 +49,32 @@ seem to work. On the other hand, increasing the font size (Ctrl-=)
 seems to work ok.
  --------> Nevermind --- I got it fixed .
 
+--------------------------------------------------------------
 
+Rudimentary Haskell style (non-sugared) lists are supported as well.
+However, unlike in Haskell, the lists may be heterogeneous.
+
+; a := 1 : 2 : 3 : 4 : nil
+
+; car(a)
+
+1
+
+; cdr(a)
+
+[2, 3, 4]
+
+; cons(5, a)
+
+[5, 1, 2, 3, 4]
+
+; cons(a : nil, a)
+[[[1, 2, 3, 4]], 1, 2, 3, 4]
+
+Note that internally, Python lists are used, and I did NOT flip the
+list to make popping and pushing elements efficient. This means
+that inserting an element takes linear time, i.e. list operations
+are very slow.
+
+However, considering this is a Toy language, I think it is pretty
+productive work for a single Friday evening.
