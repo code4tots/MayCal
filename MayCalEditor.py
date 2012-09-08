@@ -37,7 +37,7 @@ class MathEditor(Tkinter.Tk):
         self.bind_all("<Control-s>", self.save)
         self.bind_all("<Control-y>", self.evaluate)
         self.bind_all("<Control-=>", self.increaseFont)
-        # self.bind_all("<Control-->", self.decreaseFont)
+        self.bind_all("<Control-minus>", self.decreaseFont)
         
         # Build widgets
         self.customFont = tkFont.Font(family="Courier", size=18)

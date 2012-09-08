@@ -17,6 +17,7 @@ def lex(strg):
     return (strg.replace('(', ' ( ').
                  replace(')', ' ) ').
                  replace(',', ' , ').
+                 replace(':', ' : ').
                  replace('\\', ' \\ ').
                  split())
                 
